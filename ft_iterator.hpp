@@ -1,5 +1,5 @@
-#if !defined(MUTANT_STACK_HPP)
-#define MUTANT_STACK_HPP
+#if !defined(FT_ITERATOR_HPP)
+#define FT_ITERATOR_HPP
 
 namespace ft
 {
@@ -57,7 +57,7 @@ namespace ft
 	//classe para o acesso random, que sera utilizado no container vector
 	class random_access_iterator : public iterator< typename iterator_traits<Iterator>::iterator_category,
 													typename iterator_traits<Iterator>::value_type,
-													typename iterator_traits<Iterator>::difference_distance,
+													typename iterator_traits<Iterator>::difference_type,
 													typename iterator_traits<Iterator>::pointer,
 													typename iterator_traits<Iterator>::reference>
 	{
@@ -67,7 +67,7 @@ namespace ft
 			typedef Iterator												iterator_type;
 			typedef typename iterator_traits<Iterator>::iterator_category	iterator_category;
 			typedef typename iterator_traits<Iterator>::value_type			value_type;
-			typedef typename iterator_traits<Iterator>::difference_distance	difference_distance;
+			typedef typename iterator_traits<Iterator>::difference_type		difference_type;
 			typedef typename iterator_traits<Iterator>::pointer				pointer;
 			typedef typename iterator_traits<Iterator>::reference			reference;
 			
@@ -86,7 +86,7 @@ namespace ft
 			{return random_access_iterator(current + n);}
 
 			random_access_iterator	operator- (difference_type n) const
-			{return random_access_iterator(current + n);};
+			{return random_access_iterator(current - n);};
 
 			random_access_iterator	operator++ () const
 			{
