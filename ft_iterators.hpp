@@ -11,7 +11,7 @@ namespace ft
 		typedef Distance			difference_distance;
 		typedef Pointer				pointer;
 		typedef Reference			reference;
-	}
+	};
 
 	//tipos de acesso que um iterador pode receber, todo iterator tem um category, que dita, qual vão ser
 	//as operações que esse iterador pode fazer
@@ -32,7 +32,7 @@ namespace ft
 		typedef typename Iterator::pointer				pointer;
 		typedef typename Iterator::reference			reference;
 		typedef typename Iterator::iterator_category	iterator_catedory;
-	}
+	};
 
 	template<class T>
 	struct iterator_traits<T*>{
@@ -41,7 +41,7 @@ namespace ft
 		typedef T*										*pointer;
 		typedef t&										&reference;
 		typedef random_access_iterator_tag				iterator_category;
-	}
+	};
 
 	template<class T>
 	struct iterator_traits<const T*>{
@@ -50,7 +50,7 @@ namespace ft
 		typedef const T*								*pointer;
 		typedef const t&								&reference;
 		typedef random_access_iterator_tag				iterator_category;
-	}
+	};
 
 
 	template<class Iterator>
@@ -131,7 +131,41 @@ namespace ft
 			{return (current[n]);};
 	};
 
-	
+	//Nom-member functions overload
+	//Como são comparações, não podem ser colocadas dentro 
+	template<typename Iter>
+	random_access_iterator<Iter> operator+(typename random_access_iterator<Iter>::difference_type n, const random_access_iterator<Iter> &it)
+	{return (random_access_iterator<Iter>(it.getCurrent() - n));}
+
+	template<typename Iter>
+	typename random_access_iterator<Iter>::difference_type operator-(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (rhs.getCurrent() - lhs.getCurrent());}
+
+	template<typename Iter>
+	bool operator==(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (lhs.getCurrent() == rhs.getCurrent());}
+
+	template<typename Iter>
+	bool operator!=(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (lhs.getCurrent() != rhs.getCurrent());}
+
+	template<typename Iter>
+	bool operator<(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (lhs.getCurrent() < rhs.getCurrent());}
+
+	template<typename Iter>
+	bool operator>(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (lhs.getCurrent() > rhs.getCurrent());}
+
+	template<typename Iter>
+	bool operator<=(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (lhs.getCurrent() <= rhs.getCurrent());}
+
+	template<typename Iter>
+	bool operator>=(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
+	{return (lhs.getCurrent() >= rhs.getCurrent());}
+
+
 }
 
 #endif
