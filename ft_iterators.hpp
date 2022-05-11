@@ -54,6 +54,7 @@ namespace ft
 
 
 	template<class Iterator>
+	//classe para o acesso random, que sera utilizado no container vector
 	class random_access_iterator : public iterator< typename iterator_traits<Iterator>::iterator_category,
 													typename iterator_traits<Iterator>::value_type,
 													typename iterator_traits<Iterator>::difference_distance,
@@ -72,9 +73,8 @@ namespace ft
 			
 			random_access_iterator(){};
 			explicit random_access_iterator(Iterator it) : current(it){};
-			//need atention
-			template <typename Iter>
-			random_access_iterator (const random_access_iterator<Iter> &rai) : current (rai.getCurrent()) {};
+			//construtor de copia.
+			random_access_iterator (const random_access_iterator<Iterator> &rai) : current (rai.getCurrent()) {};
 
 			iterator_type	getCurrent() const 
 			{return current;};
@@ -124,7 +124,14 @@ namespace ft
 				return (*this);
 			}
 
-	}
+			pointer					operator->() const
+			{return(&(this.operator*()))};
+
+			reference				operator[](difference_type n) const
+			{return (current[n]);};
+	};
+
+	
 }
 
 #endif
