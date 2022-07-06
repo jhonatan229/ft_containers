@@ -1,0 +1,5 @@
+if(EXISTS "/home/jhow/mano/containers/build/my_test_container[1]_tests.cmake")
+  include("/home/jhow/mano/containers/build/my_test_container[1]_tests.cmake")
+else()
+  add_test(my_test_container_NOT_BUILT my_test_container_NOT_BUILT)
+endif()
