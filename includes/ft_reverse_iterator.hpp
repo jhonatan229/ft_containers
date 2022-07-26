@@ -114,19 +114,19 @@ namespace ft
 
 	template<typename Iter>
 	bool operator<(const reverse_iterator<Iter> &lhs, const reverse_iterator<Iter> &rhs)
-	{return (lhs.base() < rhs.base());}
-
-	template<typename Iter>
-	bool operator>(const reverse_iterator<Iter> &lhs, const reverse_iterator<Iter> &rhs)
 	{return (lhs.base() > rhs.base());}
 
 	template<typename Iter>
+	bool operator>(const reverse_iterator<Iter> &lhs, const reverse_iterator<Iter> &rhs)
+	{return (lhs.base() < rhs.base());}
+
+	template<typename Iter>
 	bool operator<=(const reverse_iterator<Iter> &lhs, const reverse_iterator<Iter> &rhs)
-	{return (lhs.base() <= rhs.base());}
+	{return (lhs.base() >= rhs.base());}
 
 	template<typename Iter>
 	bool operator>=(const reverse_iterator<Iter> &lhs, const reverse_iterator<Iter> &rhs)
-	{return (lhs.base() >= rhs.base());}
+	{return (lhs.base() <= rhs.base());}
 
 }
 
