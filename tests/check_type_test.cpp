@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include "../includes/check_type.hpp"
 
-TEST(check_type, Test_all_types) {
+TEST(check_type, Test_all_types)
+{
 	EXPECT_TRUE(ft::is_integral<bool>::value == true);
 	EXPECT_TRUE(ft::is_integral<char>::value == true);
 	EXPECT_TRUE(ft::is_integral<wchar_t>::value == true);

@@ -165,7 +165,15 @@ namespace ft
 	bool operator>=(const random_access_iterator<Iter> &lhs, const random_access_iterator<Iter> &rhs)
 	{return (lhs.getCurrent() >= rhs.getCurrent());}
 
-
+	template<typename InputIterator>
+	typename iterator_traits<InputIterator>::difference_type distance(InputIterator first, InputIterator last) {
+		typename ft::iterator_traits<InputIterator>::difference_type result = 0;
+		while (first != last) {
+			++result;
+			++first;
+		}
+		return result;
+	}
 }
 
 #endif
