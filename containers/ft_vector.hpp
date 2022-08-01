@@ -194,6 +194,32 @@ namespace ft
 				}
 			}
 
+		template<class InputIterator>
+		void assign(InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last){
+			for (size_type i = 0; i< this->_size; i++)
+				this->_alloc.destroy(this->_vec + i);
+			this->_alloc.deallocate(this->_vec, this->_size);
+			this->_size = ft::distance(first, last);
+			if(this->_capacity < this->_size)
+				this->_capacity = this->_size;
+			this->_vec = this->_alloc.allocate(this->_capacity);
+			for (size_type i = 0; i < this->_size; i++)
+				this->_alloc.construct(this->_vec + i, *(first + i));
+		}
+
+		void assign(size_type n, const value_type &val){
+			for(size_type i = 0; i < this->_size; i++)
+				this->_alloc.destroy(this->_vec + i);
+			this->_alloc.deallocate(this->_vec, this->_size);
+			this->_size = n;
+			if(this->_capacity < this->_size)
+				this->_capacity = this->_size;
+			this->_vec = this->_alloc.allocate(this->_capacity);
+			for(size_type i = 0; i < this->_capacity; i++)
+				this->_alloc.construct(this->_vec + i, val);
+		}
+
+		
 	};
 }
 
