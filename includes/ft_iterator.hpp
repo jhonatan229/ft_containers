@@ -4,13 +4,13 @@
 namespace ft
 {
 	//template dos iteradores, é uma casca com os atributos que um iterator precisa;
-	template<class Category, class T, class Distance, class Pointer, class Reference>
-	struct iterator{
-		typedef Category			iterator_category;
-		typedef T					value_type;
-		typedef Distance			difference_distance;
-		typedef Pointer				pointer;
-		typedef Reference			reference;
+	template <class Category, class T, class Distance = ptrdiff_t, class Pointer = T*, class Reference = T&>
+	struct iterator {
+		typedef T			value_type;
+		typedef Distance	difference_type;
+		typedef Pointer		pointer;
+		typedef Reference	reference;
+		typedef Category	iterator_category;
 	};
 
 	//tipos de acesso que um iterador pode receber, todo iterator tem um category, que dita, qual vão ser

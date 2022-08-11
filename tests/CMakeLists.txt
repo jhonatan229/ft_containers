@@ -11,7 +11,7 @@ add_subdirectory(googletest)
 enable_testing()
 
 add_executable(my_test_container
-	test.cpp check_type_test.cpp utility_test.cpp
+	test.cpp check_type_test.cpp utility_test.cpp my_vector_test.cpp
 )
 target_link_libraries(my_test_container gtest_main)
 target_include_directories(my_test_container PUBLIC ${HEADERS})
