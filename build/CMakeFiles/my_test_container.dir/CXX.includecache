@@ -6,13 +6,27 @@
 
 #IncludeRegexTransform: 
 
+/home/jhow/mano/containers/containers/ft_vector.hpp
+memory
+-
+ft_iterator.hpp
+/home/jhow/mano/containers/containers/ft_iterator.hpp
+ft_reverse_iterator.hpp
+/home/jhow/mano/containers/containers/ft_reverse_iterator.hpp
+check_type.hpp
+/home/jhow/mano/containers/containers/check_type.hpp
+algorithm.hpp
+/home/jhow/mano/containers/containers/algorithm.hpp
+
+/home/jhow/mano/containers/includes/algorithm.hpp
+
 /home/jhow/mano/containers/includes/check_type.hpp
 
-/home/jhow/mano/containers/tests/check_type_test.cpp
-gtest/gtest.h
--
-../includes/check_type.hpp
-/home/jhow/mano/containers/includes/check_type.hpp
+/home/jhow/mano/containers/includes/ft_iterator.hpp
+
+/home/jhow/mano/containers/includes/ft_reverse_iterator.hpp
+ft_iterator.hpp
+/home/jhow/mano/containers/includes/ft_iterator.hpp
 
 /home/jhow/mano/containers/tests/googletest/googletest/include/gtest/gtest-assertion-result.h
 memory
@@ -373,4 +387,10 @@ cxxabi.h
 -
 acxx_demangle.h
 -
+
+/home/jhow/mano/containers/tests/my_vector_test.cpp
+gtest/gtest.h
+-
+../containers/ft_vector.hpp
+/home/jhow/mano/containers/containers/ft_vector.hpp
 

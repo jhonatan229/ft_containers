@@ -272,6 +272,33 @@ check_type_test.cpp.s:
 	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/check_type_test.cpp.s
 .PHONY : check_type_test.cpp.s
 
+my_vector_test.o: my_vector_test.cpp.o
+
+.PHONY : my_vector_test.o
+
+# target to build an object file
+my_vector_test.cpp.o:
+	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/my_vector_test.cpp.o
+.PHONY : my_vector_test.cpp.o
+
+my_vector_test.i: my_vector_test.cpp.i
+
+.PHONY : my_vector_test.i
+
+# target to preprocess a source file
+my_vector_test.cpp.i:
+	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/my_vector_test.cpp.i
+.PHONY : my_vector_test.cpp.i
+
+my_vector_test.s: my_vector_test.cpp.s
+
+.PHONY : my_vector_test.s
+
+# target to generate assembly for a file
+my_vector_test.cpp.s:
+	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/my_vector_test.cpp.s
+.PHONY : my_vector_test.cpp.s
+
 o_test.o: o_test.cpp.o
 
 .PHONY : o_test.o
@@ -326,6 +353,33 @@ test.cpp.s:
 	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+utility_test.o: utility_test.cpp.o
+
+.PHONY : utility_test.o
+
+# target to build an object file
+utility_test.cpp.o:
+	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/utility_test.cpp.o
+.PHONY : utility_test.cpp.o
+
+utility_test.i: utility_test.cpp.i
+
+.PHONY : utility_test.i
+
+# target to preprocess a source file
+utility_test.cpp.i:
+	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/utility_test.cpp.i
+.PHONY : utility_test.cpp.i
+
+utility_test.s: utility_test.cpp.s
+
+.PHONY : utility_test.s
+
+# target to generate assembly for a file
+utility_test.cpp.s:
+	$(MAKE) -f CMakeFiles/my_test_container.dir/build.make CMakeFiles/my_test_container.dir/utility_test.cpp.s
+.PHONY : utility_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -348,12 +402,18 @@ help:
 	@echo "... check_type_test.o"
 	@echo "... check_type_test.i"
 	@echo "... check_type_test.s"
+	@echo "... my_vector_test.o"
+	@echo "... my_vector_test.i"
+	@echo "... my_vector_test.s"
 	@echo "... o_test.o"
 	@echo "... o_test.i"
 	@echo "... o_test.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... utility_test.o"
+	@echo "... utility_test.i"
+	@echo "... utility_test.s"
 .PHONY : help
 
 
