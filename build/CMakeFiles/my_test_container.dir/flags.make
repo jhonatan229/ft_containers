@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/jhow/mano/containers/tests/../includes -I/home/jhow/mano/containers/tests/googletest -isystem /home/jhow/mano/containers/tests/googletest/googletest/include -isystem /home/jhow/mano/containers/tests/googletest/googletest 
+CXX_INCLUDES = -I/home/jhow/mano/containers/tests/../includes -I/home/jhow/mano/containers/tests/../iterators -I/home/jhow/mano/containers/tests/googletest -isystem /home/jhow/mano/containers/tests/googletest/googletest/include -isystem /home/jhow/mano/containers/tests/googletest/googletest 
 

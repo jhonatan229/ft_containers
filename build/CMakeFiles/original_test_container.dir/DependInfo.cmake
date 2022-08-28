@@ -11,6 +11,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/jhow/mano/containers/tests/../includes"
+  "/home/jhow/mano/containers/tests/../iterators"
   "/home/jhow/mano/containers/tests/googletest"
   "/home/jhow/mano/containers/tests/googletest/googletest/include"
   "/home/jhow/mano/containers/tests/googletest/googletest"
