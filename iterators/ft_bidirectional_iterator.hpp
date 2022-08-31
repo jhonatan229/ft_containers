@@ -5,18 +5,13 @@
 
 namespace ft
 {
-
 	template <typename T>
 	class bidirectional_iterator
 	{
-
-	private:
-		iterator_type _ptr;;
-
 	public:
 		typedef ft::bidirectional_iterator_tag iterator_category;
 		typedef T value_type;
-		typedef ft::ptrdiff_t difference_type;
+		typedef std::ptrdiff_t difference_type;
 		typedef T &reference;
 		typedef T *pointer;
 		typedef bidirectional_iterator<value_type> iterator;
@@ -35,8 +30,8 @@ namespace ft
 		}
 		~bidirectional_iterator() {}
 
-		iterator_type getCurrent() const {return current;};
-		operator if_const() const { return if_const(_ptr); }
+		iterator_type getCurrent() const {return _ptr;};
+		// operator if_const() const { return if_const(_ptr); }
 		reference operator*() { return _ptr->value; }
 		pointer operator->() { return &(_ptr->value); }
 
@@ -65,6 +60,8 @@ namespace ft
 			_ptr = _ptr->predecessor();
 			return tmp;
 		}
+	private:
+		iterator_type _ptr;
 	};
 
 	template<typename Iter>

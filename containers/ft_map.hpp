@@ -17,15 +17,6 @@ namespace ft
 	class map
 	{
 
-	private:
-		// actual tree structure
-		map_node *_root;
-		map_node *_begin;
-		map_node *_end;
-		size_type _size;
-		key_compare _compare;
-		alloc_node _alloc;
-
 	public:
 		typedef Key key_type;
 		typedef T mapped_type;
@@ -36,15 +27,25 @@ namespace ft
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::pointer pointer;
 		typedef typename allocator_type::const_pointer const_pointer;
-		typedef bidirectional_iterator<value_type, pointer, reference> iterator;
-		typedef bidirectional_iterator<value_type, const_pointer, const_reference> const_iterator;
-		typedef reverse_iterator<const_iterator> const_reverse_iterator;
-		typedef reverse_iterator<iterator> reverse_iterator;
+		typedef bidirectional_iterator<value_type> iterator;
+		typedef bidirectional_iterator<value_type> const_iterator;
+		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator> reverse_iterator;
 		typedef std::ptrdiff_t difference_type;
 		typedef size_t size_type;
 		typedef BSTNode<value_type> map_node;
 		typedef typename Alloc::template rebind<map_node>::other alloc_node;
 
+	private:
+		// actual tree structure
+		map_node *_root;
+		map_node *_begin;
+		map_node *_end;
+		size_type _size;
+		key_compare _compare;
+		alloc_node _alloc;
+
+	public:
 		class value_compare
 		{
 			friend class map;
@@ -125,11 +126,15 @@ namespace ft
 		}
 
 		//-> Returns an iterator referring to the first element in the map container.
-		iterator begin(){
-			return (!size() ? end() : iterator(_begin->parent))}
+		iterator begin()
+		{
+			return (!size() ? end() : iterator(_begin->parent));
+		}
 
-		const_iterator begin() const {
-			return (!size() ? end() : const_iterator(_begin->parent))}
+		const_iterator begin() const
+		{
+			return (!size() ? end() : const_iterator(_begin->parent));
+		}
 
 		//-> Returns an iterator referring to the past-the-end element in the map container.
 		iterator end()
@@ -160,7 +165,7 @@ namespace ft
 			bool found = false;
 			map_node *return_node = NULL;
 
-			_root = newInsert(_root, NULL, val, found, return_node);
+			_root = new_insert(_root, NULL, val, found, return_node);
 			setup_tree_begin_end();
 			if (found)
 				return ft::make_pair(iterator(return_node), false);
@@ -174,10 +179,10 @@ namespace ft
 			return insert(val).first;
 		}
 
-		template <cass InputIterator>
+		template <class InputIterator>
 		void insert(InputIterator first, InputIterator last)
 		{
-			for (InputIterator iter(first), iter != last, iter++)
+			for (InputIterator iter(first); iter != last; iter++)
 				insert(*iter);
 		}
 
@@ -185,13 +190,13 @@ namespace ft
 		{
 			bool found = false;
 			_root = deleteNode(_root, k, found);
-			setupBeginEndTree();
+			setup_tree_begin_end();
 			return (found ? 1 : 0);
 		}
 
 		void erase(iterator first, iterator last)
 		{
-			for (iterator iter(first), iter != last, iter++)
+			for (iterator iter(first); iter != last; iter++)
 			{
 				iterator tmp(iter);
 				erase(tmp);
@@ -230,7 +235,7 @@ namespace ft
 
 		iterator find(const key_type &k)
 		{
-			for (iterator iter = begin(), iter != end(), iter++)
+			for (iterator iter = begin(); iter != end(); iter++)
 			{
 				if (iter->first == k)
 					return iter;
@@ -238,9 +243,9 @@ namespace ft
 			return end();
 		}
 
-		const_iterator find(const key_type &k)
+		const_iterator find(const key_type &k) const
 		{
-			for (const_iterator iter = begin(), iter != end(), iter++)
+			for (const_iterator iter = begin(); iter != end(); iter++)
 			{
 				if (iter->first == k)
 					return iter;
@@ -255,7 +260,7 @@ namespace ft
 
 		iterator lower_bound(const key_type &k)
 		{
-			for (iterator iter = begin(), iter != end(), iter++)
+			for (iterator iter = begin(); iter != end(); iter++)
 			{
 				if (!_compare(iter->first, k))
 					return (iter);
@@ -264,7 +269,7 @@ namespace ft
 		}
 		const_iterator lower_bound(const key_type &k) const
 		{
-			for (const_iterator iter = begin(), iter != end(), iter++)
+			for (const_iterator iter = begin(); iter != end(); iter++)
 			{
 				if (!_compare(iter->first, k))
 					return (iter);
@@ -274,7 +279,7 @@ namespace ft
 
 		iterator upper_bound(const key_type &k)
 		{
-			for (iterator iter = begin(), iter != end(), iter++)
+			for (iterator iter = begin(); iter != end(); iter++)
 			{
 				if (!_compare(k, iter->first))
 					return (iter);
@@ -283,7 +288,7 @@ namespace ft
 		}
 		const_iterator upper_bound(const key_type &k) const
 		{
-			for (const_iterator iter = begin(), iter != end(), iter++)
+			for (const_iterator iter = begin(); iter != end(); iter++)
 			{
 				if (!_compare(k, iter->first))
 					return (iter);
@@ -310,14 +315,14 @@ namespace ft
 		}
 
 	private:
-		void initialise_constuctor()
+		void initialise_constructor()
 		{
-			_root = alloc.allocate(1);
-			_alloc.constuct(_root, value_type());
-			_begin = alloc.allocate(1);
-			_alloc.constuct(_begin, value_type());
-			_end = alloc.allocate(1);
-			_alloc.constuct(_end, value_type());
+			_root = _alloc.allocate(1);
+			_alloc.construct(_root, value_type());
+			_begin = _alloc.allocate(1);
+			_alloc.construct(_begin, value_type());
+			_end = _alloc.allocate(1);
+			_alloc.construct(_end, value_type());
 
 			_begin->parent = _root;
 			_end->parent = _root;
@@ -341,7 +346,7 @@ namespace ft
 		{
 			Type tmp(a);
 			a = b;
-			b = tmp
+			b = tmp;
 		}
 
 		map_node *find_higher_number(map_node *node)
@@ -383,7 +388,7 @@ namespace ft
 				if (k < tmp->value.first)
 					tmp = tmp->left;
 				else if (k > tmp->value.first)
-					tmp = tmp->rights
+					tmp = tmp->rights;
 			}
 			return NULL;
 		}
@@ -457,7 +462,7 @@ namespace ft
 				else if (tmp->parent && compare(tmp->parent->value.first, node->value.first))
 					tmp->parent->right = tmp;
 				node = tmp;
-				ajust_height(node)
+				ajust_height(node);
 			}
 			return node;
 		}
@@ -480,9 +485,100 @@ namespace ft
 				node->right = right_rotate(node->right);
 				return left_rotate(node);
 			}
-			return node
+			return node;
 		}
 
+		map_node *create_new_node(const value_type &val, map_node *parent, bool &found, map_node *&return_node)
+		{
+			map_node *new_node = _alloc.allocate(1);
+			_alloc.construct(new_node);
+
+			new_node->height = 1;
+			new_node->parent = parent;
+			found = false;
+			return_node = new_node;
+			_size++;
+			return new_node;
+		}
+
+		map_node *new_insert(map_node *node, map_node *parent, const value_type &val, bool &found, map_node *&return_node)
+		{
+			key_compare compare = key_compare();
+			if (!node || node == begin() || node == end() || size() == 0)
+			{
+				if (size() == 0)
+				{
+					_alloc.destroy(_root);
+					_alloc.deallocate(_root, 1);
+				}
+				return create_new_node(val, parent, found, return_node);
+			}
+			if (compare(val.first, node->value.first))
+				node->left = new_insert(node->left, node, val, found, return_node);
+			else if (compare(node->value.first, val.first))
+				node->right = new_insert(node->right, node, val, found, return_node);
+			else
+			{
+				found = true;
+				return_node = node;
+				return node;
+			}
+
+			node->height = 1 + max(height(node->left), height(node->right));
+
+			return balance_insert_tree(node, val);
+		}
+
+		map_node *balance_erase_tree(map_node *root)
+		{
+			int first_height = 0;
+			int second_height = 0;
+
+			if (root->left && root->left != begin())
+				first_height = root->left->height;
+			if (root->right && root->right != end())
+				second_height = root->right->height;
+			if (abs(first_height - second_height) > 1)
+			{
+				if (first_height < second_height)
+				{
+					int right_height_left = 0;
+					int right_height_right = 0;
+					if (root->right->right && root->right->right != end())
+						right_height_right = root->right->right->height;
+					if (root->right->left && root->right->left != begin())
+						right_height_left = root->right->left->height;
+					if (right_height_left > right_height_right)
+					{
+						root->right = right_rotate(root->right);
+						root = left_rotate(root);
+					}
+					else
+						root = left_rotate(root);
+				}
+				else
+				{
+					int left_height_left = 0;
+					int left_height_right = 0;
+					if (root->left->right && root->left->right != end())
+						left_height_right = root->left->right->height;
+					if (root->left->left && root->left->left != begin())
+						left_height_left = root->left->left->height;
+					if (left_height_left > left_height_right)
+						root = right_rotate(root);
+					else
+					{
+						root->left = left_rotate(root->left);
+						root = right_rotate(root);
+					}
+				}
+			}
+			return root;
+		}
+
+		// map_node *delete_with_left_child(map_node *node){
+		// 	if (node->parent)
+		// }
 	};
 }
 
