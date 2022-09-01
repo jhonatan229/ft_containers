@@ -1,4 +1,4 @@
-#if !defined(FT_ITERATOR_HPP)
+#ifndef FT_ITERATOR_HPP
 #define FT_ITERATOR_HPP
 
 #include <cstddef>
@@ -33,7 +33,7 @@ namespace ft
 		typedef typename Iterator::value_type			value_type;
 		typedef typename Iterator::pointer				pointer;
 		typedef typename Iterator::reference			reference;
-		typedef typename Iterator::iterator_category	iterator_catedory;
+		typedef typename Iterator::iterator_category	iterator_category;
 	};
 
 	template<class T>

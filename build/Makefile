@@ -353,6 +353,33 @@ o_test.cpp.s:
 	$(MAKE) -f CMakeFiles/original_test_container.dir/build.make CMakeFiles/original_test_container.dir/o_test.cpp.s
 .PHONY : o_test.cpp.s
 
+original_map.o: original_map.cpp.o
+
+.PHONY : original_map.o
+
+# target to build an object file
+original_map.cpp.o:
+	$(MAKE) -f CMakeFiles/original_test_container.dir/build.make CMakeFiles/original_test_container.dir/original_map.cpp.o
+.PHONY : original_map.cpp.o
+
+original_map.i: original_map.cpp.i
+
+.PHONY : original_map.i
+
+# target to preprocess a source file
+original_map.cpp.i:
+	$(MAKE) -f CMakeFiles/original_test_container.dir/build.make CMakeFiles/original_test_container.dir/original_map.cpp.i
+.PHONY : original_map.cpp.i
+
+original_map.s: original_map.cpp.s
+
+.PHONY : original_map.s
+
+# target to generate assembly for a file
+original_map.cpp.s:
+	$(MAKE) -f CMakeFiles/original_test_container.dir/build.make CMakeFiles/original_test_container.dir/original_map.cpp.s
+.PHONY : original_map.cpp.s
+
 test.o: test.cpp.o
 
 .PHONY : test.o
@@ -438,6 +465,9 @@ help:
 	@echo "... o_test.o"
 	@echo "... o_test.i"
 	@echo "... o_test.s"
+	@echo "... original_map.o"
+	@echo "... original_map.i"
+	@echo "... original_map.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"

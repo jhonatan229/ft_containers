@@ -6,6 +6,7 @@
 #include "../iterators/ft_reverse_iterator.hpp"
 #include "../includes/check_type.hpp"
 #include "../includes/utility.hpp"
+#include "../includes/algorithm.hpp"
 
 namespace ft
 {
@@ -122,7 +123,7 @@ namespace ft
 		//-> If k matches the key of an element in the container, the function returns a reference to its mapped value.
 		mapped_type &operator[](const key_type &k)
 		{
-			return (*((insert(make_pair(k, mapped_type()))).first)).second;
+			return (*((insert(ft::make_pair(k, mapped_type()))).first)).second;
 		}
 
 		//-> Returns an iterator referring to the first element in the map container.
@@ -189,7 +190,7 @@ namespace ft
 		size_type erase(const key_type &k)
 		{
 			bool found = false;
-			_root = deleteNode(_root, k, found);
+			_root = delete_node(_root, k, found);
 			setup_tree_begin_end();
 			return (found ? 1 : 0);
 		}
@@ -349,18 +350,18 @@ namespace ft
 			b = tmp;
 		}
 
-		map_node *find_higher_number(map_node *node)
-		{
-			map_node *current = node;
-			while (current && current->right)
-				current = current->right;
-			return current;
-		}
-
 		map_node *find_smallest_number(map_node *node)
 		{
 			map_node *current = node;
-			while (current && current->right)
+			while (current && current->left && current->left != _begin)
+				current = current->left;
+			return current;
+		}
+
+		map_node *find_higher_number(map_node *node)
+		{
+			map_node *current = node;
+			while (current && current->right && current->right != _end)
 				current = current->right;
 			return current;
 		}
@@ -400,14 +401,14 @@ namespace ft
 
 		int height(map_node *node)
 		{
-			if (!node || node == begin() || node == end() || size() == 0)
+			if (!node || node == _begin || node == _end || size() == 0)
 				return 0;
 			return node->height;
 		}
 
 		int get_balance(map_node *node)
 		{
-			if (!node || node == begin() || node == end() || size() == 0)
+			if (!node || node == _begin || node == _end || size() == 0)
 				return 0;
 			return height(node->left) - height(node->right);
 		}
@@ -434,7 +435,7 @@ namespace ft
 				if (tmp->right && tmp->right != _end)
 					tmp->right->parent = node;
 				tmp->right = node;
-				tmp->parent = node->parant;
+				tmp->parent = node->parent;
 				node->parent = tmp;
 				if (tmp->parent && compare(node->value.first, tmp->parent->value.first))
 					tmp->parent->left = tmp;
@@ -455,7 +456,7 @@ namespace ft
 				if (tmp->left && tmp->left != _end)
 					tmp->left->parent = node;
 				tmp->left = node;
-				tmp->parent = node->parant;
+				tmp->parent = node->parent;
 				node->parent = tmp;
 				if (tmp->parent && compare(node->value.first, tmp->parent->value.first))
 					tmp->parent->left = tmp;
@@ -478,9 +479,9 @@ namespace ft
 				node->left = left_rotate(node->left);
 				return right_rotate(node);
 			}
-			if (balance > 1 && node->right && node->right != _begin && comp(val.first, node->right->value.first))
-				return (right_rotate(node));
-			else if (balance > 1 && node->right && node->right != _begin && comp(node->right->value.first, val.first))
+			if (balance > -1 && node->right && node->right != _end && comp(val.first, node->right->value.first))
+				return (left_rotate(node));
+			else if (balance > -1 && node->right && node->right != _end && comp(node->right->value.first, val.first))
 			{
 				node->right = right_rotate(node->right);
 				return left_rotate(node);
@@ -491,7 +492,7 @@ namespace ft
 		map_node *create_new_node(const value_type &val, map_node *parent, bool &found, map_node *&return_node)
 		{
 			map_node *new_node = _alloc.allocate(1);
-			_alloc.construct(new_node);
+			_alloc.construct(new_node, val);
 
 			new_node->height = 1;
 			new_node->parent = parent;
@@ -504,7 +505,7 @@ namespace ft
 		map_node *new_insert(map_node *node, map_node *parent, const value_type &val, bool &found, map_node *&return_node)
 		{
 			key_compare compare = key_compare();
-			if (!node || node == begin() || node == end() || size() == 0)
+			if (!node || node == _begin || node == _end || size() == 0)
 			{
 				if (size() == 0)
 				{
@@ -534,9 +535,9 @@ namespace ft
 			int first_height = 0;
 			int second_height = 0;
 
-			if (root->left && root->left != begin())
+			if (root->left && root->left != _begin)
 				first_height = root->left->height;
-			if (root->right && root->right != end())
+			if (root->right && root->right != _end)
 				second_height = root->right->height;
 			if (abs(first_height - second_height) > 1)
 			{
@@ -544,9 +545,9 @@ namespace ft
 				{
 					int right_height_left = 0;
 					int right_height_right = 0;
-					if (root->right->right && root->right->right != end())
+					if (root->right->right && root->right->right != _end)
 						right_height_right = root->right->right->height;
-					if (root->right->left && root->right->left != begin())
+					if (root->right->left && root->right->left != _begin)
 						right_height_left = root->right->left->height;
 					if (right_height_left > right_height_right)
 					{
@@ -560,9 +561,9 @@ namespace ft
 				{
 					int left_height_left = 0;
 					int left_height_right = 0;
-					if (root->left->right && root->left->right != end())
+					if (root->left->right && root->left->right != _end)
 						left_height_right = root->left->right->height;
-					if (root->left->left && root->left->left != begin())
+					if (root->left->left && root->left->left != _begin)
 						left_height_left = root->left->left->height;
 					if (left_height_left > left_height_right)
 						root = right_rotate(root);
@@ -576,10 +577,182 @@ namespace ft
 			return root;
 		}
 
-		// map_node *delete_with_left_child(map_node *node){
-		// 	if (node->parent)
-		// }
+		map_node *delete_node_with_left_child(map_node *node)
+		{
+			if (node->parent)
+			{
+				if (_compare(node->parent->value.first, node->value.first))
+					node->parent->right = node->left;
+				else
+					node->parent->left = node->left;
+				node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
+			}
+			map_node *tmp = node->left;
+			node->left->parent = node->parent;
+			_alloc.destroy(node);
+			_alloc.deallocate(node, 1);
+			_size--;
+			tmp = balance_erase_tree(tmp);
+			return tmp;
+		}
+
+		map_node *delete_node_with_right_child(map_node *node)
+		{
+			if (node->parent)
+			{
+				if (_compare(node->parent->value.first, node->value.first))
+					node->parent->right = node->right;
+				else
+					node->parent->left = node->right;
+				node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
+			}
+			map_node *tmp = node->right;
+			tmp->parent = node->parent;
+			_alloc.destroy(node);
+			_alloc.deallocate(node, 1);
+			_size--;
+			tmp = balance_erase_tree(tmp);
+			return tmp;
+		}
+		map_node *delete_leaf_node(map_node *node)
+		{
+			if (node->parent)
+			{
+				if (_compare(node->parent->value.first, node->value.first))
+					node->parent->right = NULL;
+				else
+					node->parent->left = NULL;
+				node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
+			}
+			_alloc.destroy(node);
+			_alloc.deallocate(node, 1);
+			_size--;
+			return NULL;
+		}
+
+		map_node *delete_node_with_two_children(map_node *node, bool &found)
+		{
+			map_node *tmp = node->right;
+			while (tmp && tmp->left)
+				tmp = tmp->left;
+			value_type value = tmp->value;
+			node->right = delete_node(node->right, tmp->value.first, found);
+
+			map_node *toAdd = _alloc.allocate(1);
+			_alloc.construct(toAdd, value);
+
+			toAdd->parent = node->parent;
+			toAdd->right = node->right;
+			toAdd->left = node->left;
+			toAdd->height = node->height;
+
+			if (node->parent && node->parent->left == node)
+				node->parent->left = toAdd;
+			if (node->parent && node->parent->right == node)
+				node->parent->right = toAdd;
+			if (node->left && node->left != _begin && node->left->parent == node)
+				node->left->parent = toAdd;
+			if (node->right && node->right != _end && node->right->parent == node)
+				node->right->parent = toAdd;
+
+			_alloc.destroy(node);
+			_alloc.deallocate(node, 1);
+			toAdd = balance_erase_tree(toAdd);
+			return toAdd;
+		}
+
+		map_node *delete_node(map_node *node, const key_type &key, bool &found)
+		{
+			if (node && node != _begin && node != _end && size())
+			{
+				// found the node -> delete operations
+				if (!_compare(node->value.first, key) && !_compare(key, node->value.first))
+				{
+					found = true;
+					if ((!node->right || node->right == _end) && (node->left && node->left != _begin))
+						return delete_node_with_left_child(node);
+					else if ((!node->left || node->left == _begin) && (node->right && node->right != _end))
+						return delete_node_with_right_child(node);
+					else if ((!node->left || node->left == _begin) && (!node->right || node->right == _end))
+						return delete_leaf_node(node);
+					else
+						return delete_node_with_two_children(node, found);
+				}
+				// node value smaller than key value -> move right
+				else if (_compare(node->value.first, key))
+				{
+					node->right = delete_node(node->right, key, found);
+					node = balance_erase_tree(node);
+				}
+				// node value bigger than key value -> move left
+				else if (_compare(key, node->value.first))
+				{
+					node->left = delete_node(node->left, key, found);
+					node = balance_erase_tree(node);
+				}
+				// update node height
+				if (node)
+					node->height = max(height(node->left), height(node->right)) + 1;
+			}
+			else
+				found = false;
+			return node;
+		}
 	};
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator==(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+
+		typename ft::map<Key, T>::const_iterator lhs_begin = lhs.begin();
+		typename ft::map<Key, T>::const_iterator rhs_begin = rhs.begin();
+
+		while (lhs_begin != lhs.end() && rhs_begin != rhs.end())
+		{
+			if (lhs_begin->first != rhs_begin->first || lhs_begin->second != rhs_begin->second)
+				return false;
+			++lhs_begin;
+			++rhs_begin;
+		}
+		return true;
+	}
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator!=(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator<(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator>(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator<=(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return !(lhs > rhs);
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	bool operator>=(const map<Key, T, Compare, Alloc> &lhs, const map<Key, T, Compare, Alloc> &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template <class Key, class T, class Compare, class Alloc>
+	void swap(map<Key, T, Compare, Alloc> &x, map<Key, T, Compare, Alloc> &y)
+	{
+		x.swap(y);
+	}
 }
 
 #endif

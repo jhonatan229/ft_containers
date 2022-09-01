@@ -19,10 +19,14 @@ memory
 /home/jhow/mano/containers/includes/check_type.hpp
 ../includes/utility.hpp
 /home/jhow/mano/containers/includes/utility.hpp
+../includes/algorithm.hpp
+/home/jhow/mano/containers/includes/algorithm.hpp
 
 /home/jhow/mano/containers/includes/BSTNode.hpp
 iostream
 -
+
+/home/jhow/mano/containers/includes/algorithm.hpp
 
 /home/jhow/mano/containers/includes/check_type.hpp
 
