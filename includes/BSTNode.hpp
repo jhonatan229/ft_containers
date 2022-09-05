@@ -21,7 +21,7 @@ namespace ft
 
 		explicit BSTNode() : parent(NULL), left(NULL), right(NULL), value(), height(0){};
 
-		explicit BSTNode(const Pair &data) : parent(NULL), left(NULL), right(NULL), value(data), height(0) {}
+		explicit BSTNode(const Pair &data) : parent(NULL), left(NULL), right(NULL), value(data), height(0){};
 
 		~BSTNode(){};
 

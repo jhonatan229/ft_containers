@@ -1,5 +1,5 @@
-#ifndef FT_MAP_H
-#define FT_MAP_H
+#ifndef FT_MAP_HPP
+#define FT_MAP_HPP
 #include <memory>
 #include "../includes/BSTNode.hpp"
 #include "../iterators/ft_bidirectional_iterator.hpp"

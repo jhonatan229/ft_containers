@@ -1,0 +1,4 @@
+tests/*.o
+tests/*.a
+obj
+ft_containers
