@@ -44,7 +44,7 @@ $(PATH_OBJ)/%.o: $(PATH_SRC)/%.cpp
 #_________________________/\__________________________#
 
 PATH_OBJ_STL = ./obj_stl
-SRC_STL = $(addprefix $(PATH_SRC_STL)/, original_map.cpp original_iterator.cpp)
+SRC_STL = $(addprefix $(PATH_SRC_STL)/, original_map.cpp original_iterator_test.cpp original_vector_test.cpp)
 OBJ_STL = $(patsubst $(PATH_SRC_STL)/%.cpp, $(PATH_OBJ_STL)/%.o, $(SRC_STL))
 
 stl: $(OBJ_STL)

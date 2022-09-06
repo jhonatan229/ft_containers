@@ -1,0 +1,86 @@
+#include <gtest/gtest.h>
+#include <vector>
+
+TEST(vector_tests, testing_constructor) {
+	std::vector<int>my_vec;
+	EXPECT_EQ(my_vec.size(), 0);
+	EXPECT_EQ(my_vec.capacity(), 0);
+}
+
+TEST(vector_tests, testing_constructor_with_param) {
+	std::vector<int> vec1(5);
+	std::vector<std::string> vec2(5, "fill");
+
+	EXPECT_EQ(vec1.size(), 5);
+	EXPECT_EQ(vec1.capacity(), 5);
+	for(std::vector<int>::iterator it = vec1.begin(); it != vec1.end(); it++)
+		EXPECT_EQ(*it, 0);
+
+	EXPECT_EQ(vec2.size(), 5);
+	EXPECT_EQ(vec2.capacity(), 5);
+	for(std::vector<std::string>::iterator it = vec2.begin(); it != vec2.end(); it++)
+		EXPECT_EQ(*it, "fill");
+}
+
+TEST(vector_tests, testing_equal_operator) {
+	int array1[] = {1, 2, 3, 4, 5};
+	std::string array2[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<int> vec1(array1, array1 + 5);
+	std::vector<std::string> vec2(array2, array2 + 5);
+
+	std::vector<int> vec3 = vec1;
+	std::vector<std::string> vec4 = vec2;
+
+	EXPECT_EQ(vec3.size(), 5);
+	EXPECT_EQ(vec3.capacity(), 5);
+	for (int i  = 0; i < 5; i++)
+		EXPECT_EQ(vec3[i], array1[i]);
+		
+	EXPECT_EQ(vec4.size(), 5);
+	EXPECT_EQ(vec4.capacity(), 5);
+	for (int i  = 0; i < 5; i++)
+		EXPECT_EQ(vec4[i], array2[i]);
+}
+TEST(vector_tests, testing_copy_operator) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);
+
+	std::vector<std::string> vec2(vec1);
+		
+	EXPECT_EQ(vec2.size(), 5);
+	EXPECT_EQ(vec2.capacity(), 5);
+	for (int i  = 0; i < 5; i++)
+		EXPECT_EQ(vec2[i], array1[i]);
+}
+
+TEST(vector_tests, testing_get_positions) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);	
+	EXPECT_EQ(vec1[0], "one");
+	EXPECT_EQ(vec1.capacity(), 5);
+	EXPECT_EQ(vec1.at(1), "two");
+	EXPECT_EQ(vec1.front(), "one");
+	EXPECT_EQ(vec1.back(), "five");
+}
+TEST(vector_tests, testing_push_back_pop_back) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);	
+	vec1.push_back("six");
+	EXPECT_EQ(vec1[5], "six");
+}
+TEST(vector_tests, test_assign) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);	
+	std::vector<std::string> vec2(array1, array1 + 3);
+	vec1.assign(4, "val");
+	for (size_t i = 0; i < vec1.size();i++){
+		EXPECT_EQ(vec1[i], "val");
+	}
+	vec1.assign(vec2.begin(), vec2.end());
+}
+

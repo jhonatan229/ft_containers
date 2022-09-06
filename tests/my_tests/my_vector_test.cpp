@@ -61,5 +61,26 @@ TEST(vector_tests, testing_get_positions) {
 	ft::vector<std::string> vec1(array1, array1 + 5);	
 	EXPECT_EQ(vec1[0], "one");
 	EXPECT_EQ(vec1.capacity(), 5);
+	EXPECT_EQ(vec1.at(1), "two");
+	EXPECT_EQ(vec1.front(), "one");
+	EXPECT_EQ(vec1.back(), "five");
+}
+TEST(vector_tests, testing_push_back_pop_back) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	ft::vector<std::string> vec1(array1, array1 + 5);	
+	vec1.push_back("six");
+	EXPECT_EQ(vec1[5], "six");
+}
+TEST(vector_tests, test_assign) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	ft::vector<std::string> vec1(array1, array1 + 5);	
+	ft::vector<std::string> vec2(array1, array1 + 3);
+	vec1.assign(3, "val");
+	for (size_t i = 0; i < vec1.size();i++){
+		std::cout << vec1[i] << "\n";
+	}
+	EXPECT_EQ(vec1[4], "val");
 }
 

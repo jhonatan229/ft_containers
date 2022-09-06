@@ -19,13 +19,13 @@ TEST(Test_my_iterator, testing_plus_operation)
 TEST(Test_my_iterator, testing_minus_operation)
 {
 	*it = *it + 1;
-	EXPECT_EQ(*(it - 1), 1);
+	EXPECT_EQ(*(it - 1), 0);
 }
 
 TEST(Test_my_iterator, testing_plusplus_operation)
 {
 	it++;
-	EXPECT_EQ(*it, 3);
+	EXPECT_EQ(*it, 2);
 }
 
 TEST(Test_my_iterator, testing_minusminus_operation)
@@ -37,7 +37,7 @@ TEST(Test_my_iterator, testing_minusminus_operation)
 TEST(Test_my_iterator, testing_plusequal_operation)
 {
 	it+= 1;
-	EXPECT_EQ(*it, 3);
+	EXPECT_EQ(*it, 2);
 }
 
 TEST(Test_my_iterator, testing_minusequal_operation)

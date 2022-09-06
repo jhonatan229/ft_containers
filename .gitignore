@@ -2,3 +2,5 @@ tests/*.o
 tests/*.a
 obj
 ft_containers
+stl
+obj_stl

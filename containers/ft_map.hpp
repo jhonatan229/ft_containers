@@ -197,9 +197,10 @@ namespace ft
 
 		void erase(iterator first, iterator last)
 		{
-			for (iterator iter(first); iter != last; iter++)
+			while (first != last)
 			{
-				iterator tmp(iter);
+				iterator tmp(first);
+				++first;
 				erase(tmp);
 			}
 		}
@@ -268,6 +269,7 @@ namespace ft
 			}
 			return end();
 		}
+
 		const_iterator lower_bound(const key_type &k) const
 		{
 			for (const_iterator iter = begin(); iter != end(); iter++)
@@ -287,6 +289,7 @@ namespace ft
 			}
 			return end();
 		}
+
 		const_iterator upper_bound(const key_type &k) const
 		{
 			for (const_iterator iter = begin(); iter != end(); iter++)
@@ -368,13 +371,15 @@ namespace ft
 
 		void setup_tree_begin_end()
 		{
+
 			map_node *leftest = find_smallest_number(_root);
 			map_node *rightest = find_higher_number(_root);
 
 			_begin->parent = leftest;
-			_end->parent = rightest;
 			if (leftest)
 				leftest->left = _begin;
+
+			_end->parent = rightest;
 			if (rightest)
 				rightest->right = _end;
 		}
