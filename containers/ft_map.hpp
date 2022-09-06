@@ -262,21 +262,27 @@ namespace ft
 
 		iterator lower_bound(const key_type &k)
 		{
-			for (iterator iter = begin(); iter != end(); iter++)
+			iterator iter = end();
+			while (--iter != begin())
 			{
-				if (!_compare(iter->first, k))
+				if (iter->first <= k)
 					return (iter);
 			}
+
+			// for (iterator iter = begin(); iter != end(); iter++)
+			// {
+			// }
 			return end();
 		}
-
 		const_iterator lower_bound(const key_type &k) const
 		{
-			for (const_iterator iter = begin(); iter != end(); iter++)
+			const_iterator iter = end();
+			while (--iter != begin())
 			{
-				if (!_compare(iter->first, k))
+				if (iter->first <= k)
 					return (iter);
 			}
+
 			return end();
 		}
 
@@ -284,7 +290,7 @@ namespace ft
 		{
 			for (iterator iter = begin(); iter != end(); iter++)
 			{
-				if (!_compare(k, iter->first))
+				if (iter->first > k)
 					return (iter);
 			}
 			return end();
@@ -294,7 +300,7 @@ namespace ft
 		{
 			for (const_iterator iter = begin(); iter != end(); iter++)
 			{
-				if (!_compare(k, iter->first))
+				if (iter->first > k)
 					return (iter);
 			}
 			return end();

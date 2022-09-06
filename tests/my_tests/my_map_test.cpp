@@ -97,3 +97,28 @@ TEST(map_tests, test_swap) {
 	EXPECT_EQ(second_map.begin()->first, 'a');
 }
 
+
+TEST(map_tests, test_lower_upper_bound) {
+	ft::map<int, int>my_map;
+	int i = 0;
+	while(my_map.size() < 100){
+		i = rand() % 100;
+		my_map.insert({i, i});
+	}
+	ft::map<int, int>::iterator it =  my_map.upper_bound(44);
+	EXPECT_EQ(it->first, 45);
+	it = my_map.lower_bound(42);
+	EXPECT_EQ(it->first, 42);
+}
+
+TEST(map_tests, test_equal_range) {
+	ft::map<int, int>my_map;
+	int i = 0;
+	while(my_map.size() < 100){
+		i = rand() % 100;
+		my_map.insert({i, i});
+	}
+	ft::pair<ft::map<int, int>::iterator, ft::map<int, int>::iterator> it = my_map.equal_range(42);
+	EXPECT_EQ(it.first->first, 42);
+	EXPECT_EQ(it.second->first, 43);
+}

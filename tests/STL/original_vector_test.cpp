@@ -70,7 +70,12 @@ TEST(vector_tests, testing_push_back_pop_back) {
 
 	std::vector<std::string> vec1(array1, array1 + 5);	
 	vec1.push_back("six");
-	EXPECT_EQ(vec1[5], "six");
+	EXPECT_EQ(*(vec1.end() - 1), "six");
+	EXPECT_EQ(vec1.size(), 6);
+	vec1.pop_back();
+	EXPECT_EQ(*(vec1.end() - 1), "five");
+	EXPECT_EQ(vec1.size(), 5);
+	
 }
 TEST(vector_tests, test_assign) {
 	std::string array1[] = { "one", "two", "three", "four", "five"};
@@ -82,5 +87,47 @@ TEST(vector_tests, test_assign) {
 		EXPECT_EQ(vec1[i], "val");
 	}
 	vec1.assign(vec2.begin(), vec2.end());
+	EXPECT_EQ(vec1.size(), 3);
+}
+
+TEST(vector_tests, test_insert) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);
+	vec1.insert(vec1.begin() + 2, "ola");
+
+	EXPECT_EQ(vec1.size(), 6);
+	EXPECT_EQ(vec1[2], "ola");
+}
+
+TEST(vector_tests, test_erase) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);
+	EXPECT_EQ(vec1.size(), 5);
+	vec1.erase(vec1.begin(), vec1.end());
+	EXPECT_EQ(vec1.size(), 0);
+	vec1.assign(3, "val");
+	vec1.erase(vec1.begin() + 1);
+	EXPECT_EQ(vec1.size(), 2);
+
+}
+TEST(vector_tests, test_swap) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);
+	std::vector<std::string> vec2;
+	vec2.assign(3, "val");
+	vec1.swap(vec2);
+	EXPECT_EQ(vec1.size(), 3);
+	EXPECT_EQ(vec2.size(), 5);
+}
+TEST(vector_tests, test_clear) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	std::vector<std::string> vec1(array1, array1 + 5);
+	EXPECT_EQ(vec1.size(), 5);
+	vec1.clear();
+	EXPECT_EQ(vec1.size(), 0);
 }
 

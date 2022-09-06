@@ -271,14 +271,14 @@ namespace ft
 
 			iterator insert(iterator position, const value_type &val)
 			{
-			size_type index = position - this->begin();
-			if (this->_size == this->_capacity)
-				reserve(this->_capacity ? this->_capacity * 2 : 10);
-			for (size_type i = this->_size; i > index; i--)
-				this->_alloc.construct(&(*this->begin()) + i, *(begin() + i - 1));
-			this->_alloc.construct(&(*this->begin()) + index, val);
-			this->_size++;
-			return this->begin() + index;
+			size_type index = ft::distance(this->begin(), position);
+				if (this->_size == this->_capacity)
+					reserve(this->_capacity ? this->_capacity * 2 : 1);
+				for (size_type i = this->_size; i > index; i--)
+					this->_alloc.construct(&(*this->begin()) + i, *(begin() + i - 1));
+				this->_alloc.construct(&(*this->begin()) + index, val);
+				this->_size++;
+				return this->begin() + index;
 			}
 
 			/**o insert vai inserir novos valores na posição posterior da position, realocando todos os itens
@@ -289,7 +289,7 @@ namespace ft
 			{
 			if (n)
 			{
-				size_type index = position - this->begin();
+				size_type index = ft::distance(this->begin(), position);
 				if (this->_size + n > this->_capacity)
 				{
 					reserve(this->_capacity ? this->_capacity * 2 : 10);
@@ -308,7 +308,7 @@ namespace ft
 			void insert(iterator position, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type first,
 						InputIterator last)
 			{
-			size_type index = position - this->begin();
+			size_type index = ft::distance(this->begin(), position);
 			size_type n = ft::distance(first, last);
 			if (this->_size + n > this->_capacity)
 				reserve(this->_capacity ? this->_capacity * 2 : n + 1);
