@@ -40,6 +40,20 @@ TEST(map_tests, test_insert_100_itens) {
 	EXPECT_EQ(my_map.begin()->first, 0);
 	EXPECT_EQ(my_map.end()->first, 100);
 }
+TEST(map_tests, test_insert_100000_itens) {
+	std::map<int, int>my_map;
+	int i = 0;
+	while(my_map.size() < 100000){
+		i = rand() % 100000;
+		my_map.insert({i, i});
+	}
+	// for (std::map<int, int>::iterator it = my_map.begin(); it != my_map.end();it++){
+	// 	std::cout << "value " << it->first << "\n";
+	// }
+	EXPECT_EQ(my_map.size(), 100000);
+	EXPECT_EQ(my_map.begin()->first, 0);
+	EXPECT_EQ(my_map.end()->first, 100000);
+}
 
 TEST(map_tests, test_find_number) {
 	std::map<int, int>my_map;
@@ -63,15 +77,15 @@ TEST(map_tests, test_find_number) {
 TEST(map_tests, test_erase_number) {
 	std::map<int, int>my_map;
 	int i = 0;
-	while(my_map.size() < 100){
-		i = rand() % 100;
+	while(my_map.size() < 100000){
+		i = rand() % 100000;
 		my_map.insert({i, i});
 	}
-	int resp = my_map.erase(42);
-	EXPECT_EQ(my_map.find(42), my_map.end());
-	EXPECT_EQ(my_map.size(), 99);
+	int resp = my_map.erase(34255);
+	EXPECT_EQ(my_map.find(34255), my_map.end());
+	EXPECT_EQ(my_map.size(), 99999);
 	EXPECT_EQ(resp, 1);
-	resp = my_map.erase(435);
+	resp = my_map.erase(222222345);
 	EXPECT_EQ(resp, 0);
 }
 

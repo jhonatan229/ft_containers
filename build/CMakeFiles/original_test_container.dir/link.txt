@@ -1,1 +1,0 @@
-/usr/bin/c++  -Wall   CMakeFiles/original_test_container.dir/o_test.cpp.o CMakeFiles/original_test_container.dir/original_map.cpp.o  -o original_test_container  lib/libgtest_main.a lib/libgtest.a -lpthread 

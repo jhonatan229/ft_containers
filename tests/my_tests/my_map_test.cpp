@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../containers/ft_map.hpp"
+#include "../containers/map.hpp"
 
 TEST(map_tests, testing_constructor) {
 	ft::map<std::string, int>my_map;
@@ -40,6 +40,17 @@ TEST(map_tests, test_insert_100_itens) {
 	EXPECT_EQ(my_map.begin()->first, 0);
 	EXPECT_EQ(my_map.end()->first, 0);
 }
+TEST(map_tests, test_insert_100000_itens) {
+	ft::map<int, int>my_map;
+	int i = 0;
+	while(my_map.size() < 100000){
+		i = rand() % 100000;
+		my_map.insert({i, i});
+	}
+	EXPECT_EQ(my_map.size(), 100000);
+	EXPECT_EQ(my_map.begin()->first, 0);
+	EXPECT_EQ(my_map.end()->first, 0);
+}
 
 TEST(map_tests, test_find_number) {
 	ft::map<int, int>my_map;
@@ -63,15 +74,15 @@ TEST(map_tests, test_find_number) {
 TEST(map_tests, test_erase_number) {
 	ft::map<int, int>my_map;
 	int i = 0;
-	while(my_map.size() < 100){
-		i = rand() % 100;
+	while(my_map.size() < 100000){
+		i = rand() % 100000;
 		my_map.insert({i, i});
 	}
-	int resp = my_map.erase(42);
-	EXPECT_EQ(my_map.find(42), my_map.end());
-	EXPECT_EQ(my_map.size(), 99);
+	int resp = my_map.erase(34255);
+	EXPECT_EQ(my_map.find(34255), my_map.end());
+	EXPECT_EQ(my_map.size(), 99999);
 	EXPECT_EQ(resp, 1);
-	resp = my_map.erase(435);
+	resp = my_map.erase(222222345);
 	EXPECT_EQ(resp, 0);
 }
 

@@ -1,4 +1,5 @@
 #ifndef CHECK_TYPE_HPP
+#define CHECK_TYPE_HPP
 
 namespace ft
 {

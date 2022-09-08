@@ -5,6 +5,7 @@ STL = stl_containers
 
 PATH_SRC = ./tests/my_tests
 PATH_SRC_STL = ./tests/STL
+PATH_SRC_INTRA = ./tests/intra_test
 PATH_GTEST = ./tests
 GTEST_DIR = ./tests/googletest/googletest
 
@@ -62,6 +63,24 @@ $(PATH_OBJ_STL)/%.o: $(PATH_SRC_STL)/%.cpp
 
 #_________________________/\__________________________#
 
+PATH_OBJ_INTRA = ./obj_intra
+SRC_INTRA = $(addprefix $(PATH_SRC_INTRA)/, intra_test.cpp)
+OBJ_INTRA = $(patsubst $(PATH_SRC_INTRA)/%.cpp, $(PATH_OBJ_INTRA)/%.o, $(SRC_INTRA))
+
+intra: $(OBJ_INTRA)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(OBJ_INTRA) -o $@
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|           $(INTRA) Created            |"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(PATH_OBJ_INTRA)/%.o: $(PATH_SRC_INTRA)/%.cpp
+	@mkdir -p $(PATH_OBJ_INTRA)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
+
+
+#_________________________/\__________________________#
 clean:
 	make clean -C $(PATH_GTEST)
 	$(RM) $(PATH_OBJ)
