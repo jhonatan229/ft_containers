@@ -12,7 +12,7 @@ GTEST_DIR = ./tests/googletest/googletest
 #_________________________/\__________________________#
 
 CPPFLAGS += -isystem $(GTEST_DIR)/include
-CXXFLAGS += -g -Wall -Wextra -Werror -pthread
+CXXFLAGS += -g -Wall -Wextra -Werror -pthread -fsanitize=address
 CXX = c++
 RM = rm -rf
 
@@ -26,7 +26,7 @@ LFLAGS = $(PATH_GTEST)/gtest_main.a -lpthread
 all: $(NAME)
 
 PATH_OBJ = ./obj
-SRC = $(addprefix $(PATH_SRC)/, my_check_type_test.cpp my_iterator_test.cpp my_map_test.cpp my_vector_test.cpp)
+SRC = $(addprefix $(PATH_SRC)/, my_check_type_test.cpp my_iterator_test.cpp my_map_test.cpp my_vector_test.cpp my_stack_test.cpp)
 OBJ = $(patsubst $(PATH_SRC)/%.cpp, $(PATH_OBJ)/%.o, $(SRC))
 
 $(NAME): $(OBJ)
@@ -81,6 +81,45 @@ $(PATH_OBJ_INTRA)/%.o: $(PATH_SRC_INTRA)/%.cpp
 
 
 #_________________________/\__________________________#
+
+PATH_OBJ = ./obj
+SRC = $(addprefix $(PATH_SRC)/, performance_test.cpp)
+OBJ = $(patsubst $(PATH_SRC)/%.cpp, $(PATH_OBJ)/%.o, $(SRC))
+
+perform: $(OBJ)
+	make -C $(PATH_GTEST)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ) -o $@
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|           $(NAME) Created            |"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(PATH_OBJ)/%.o: $(PATH_SRC)/%.cpp
+	@mkdir -p $(PATH_OBJ)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
+
+#_________________________/\__________________________#
+
+PATH_OBJ_STL = ./obj_stl
+SRC_STL = $(addprefix $(PATH_SRC_STL)/, performance_test.cpp)
+OBJ_STL = $(patsubst $(PATH_SRC_STL)/%.cpp, $(PATH_OBJ_STL)/%.o, $(SRC_STL))
+
+original_perform: $(OBJ_STL)
+	make -C $(PATH_GTEST)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ_STL) -o $@
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|           $(STL) Created            |"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(PATH_OBJ_STL)/%.o: $(PATH_SRC_STL)/%.cpp
+	@mkdir -p $(PATH_OBJ_STL)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
+
+#_________________________/\__________________________#
+
 clean:
 	make clean -C $(PATH_GTEST)
 	$(RM) $(PATH_OBJ)

@@ -28,8 +28,8 @@ namespace ft
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::pointer pointer;
 		typedef typename allocator_type::const_pointer const_pointer;
-		typedef bidirectional_iterator<value_type> iterator;
-		typedef bidirectional_iterator<value_type> const_iterator;
+		typedef bidirectional_iterator<value_type, pointer, reference> iterator;
+		typedef bidirectional_iterator<value_type, pointer, reference> const_iterator;
 		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
 		typedef std::ptrdiff_t difference_type;
@@ -440,7 +440,7 @@ namespace ft
 		// 		node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
 		// }
 
-		// map_node *right_rotate(map_node *node)
+		map_node *right_rotate(map_node *node)
 		{
 			key_compare compare = key_compare();
 			map_node *tmp = node->left;

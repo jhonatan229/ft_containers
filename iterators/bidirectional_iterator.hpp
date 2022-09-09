@@ -3,74 +3,72 @@
 
 #include "iterator.hpp"
 
-namespace ft
-{
-	template <typename T>
-	class bidirectional_iterator
-	{
-	public:
-		typedef ft::bidirectional_iterator_tag iterator_category;
-		typedef T value_type;
-		typedef std::ptrdiff_t difference_type;
-		typedef T &reference;
-		typedef T *pointer;
-		typedef bidirectional_iterator<value_type> iterator;
-		typedef bidirectional_iterator<value_type> if_const;
-		typedef BSTNode<value_type> Node;
-		typedef Node *iterator_type;
+namespace ft {
 
-		bidirectional_iterator() : _ptr(NULL) {}
-		bidirectional_iterator(iterator_type ptr) : _ptr(ptr) {}
-		bidirectional_iterator(const bidirectional_iterator &x) { *this = x; }
-		bidirectional_iterator &operator=(const bidirectional_iterator &x)
-		{
-			if (this != &x)
-				_ptr = x._ptr;
-			return *this;
-		}
-		~bidirectional_iterator() {}
+template < typename T, typename Pointer, typename Reference>
+class bidirectional_iterator {
 
-		iterator_type getCurrent() const {return _ptr;};
-		// operator if_const() const { return if_const(_ptr); }
-		reference operator*() { return _ptr->value; }
-		pointer operator->() { return &(_ptr->value); }
+public:
+	typedef std::bidirectional_iterator_tag							iterator_category;
+	typedef T														value_type;
+	typedef std::ptrdiff_t											difference_type;
+	typedef Reference												reference;
+	typedef Pointer													pointer;
+	typedef bidirectional_iterator<value_type, pointer, reference>	iterator;
+	typedef bidirectional_iterator<value_type, pointer, reference> 	if_const;
+	// iterator is on the map node itself, thus we need to define the type of the node
+	typedef BSTNode<value_type> 									Node;
+	typedef Node*													iterator_type;
 
-		iterator &operator++()
-		{
-			_ptr = _ptr->sucessor();
-			return *this;
-		}
+public:
+	// X a; X b(a); b = a; ~X()
+	bidirectional_iterator(): _ptr(NULL) {}
+	bidirectional_iterator(iterator_type ptr) : _ptr(ptr) {}
+	bidirectional_iterator(const bidirectional_iterator& x) { *this = x; }
+	bidirectional_iterator& operator= (const bidirectional_iterator& x) {
+		if (this != &x)
+			_ptr = x._ptr;
+		return *this;
+	}
+	~bidirectional_iterator(){}
 
-		iterator operator++(int)
-		{
-			iterator tmp = *this;
-			_ptr = _ptr->sucessor();
-			return tmp;
-		}
+	// const convert
+	// operator if_const() const { return if_const(_ptr); }
 
-		iterator &operator--()
-		{
-			_ptr = _ptr->predecessor();
-			return *this;
-		}
+	// a==b; a!= b;
+	bool operator== (const iterator& rhs) const { return _ptr == rhs._ptr; }
+	bool operator!= (const iterator& rhs) const { return _ptr != rhs._ptr; }
 
-		iterator operator--(int)
-		{
-			iterator tmp = *this;
-			_ptr = _ptr->predecessor();
-			return tmp;
-		}
-	private:
-		iterator_type _ptr;
-	};
+	// dereference: *a, *a = t, a->m
+	reference operator* () { return _ptr->value; }
+	pointer operator-> () { return &(_ptr->value); }
 
-	template<typename Iter>
-	bool operator==(const bidirectional_iterator<Iter> &lhs, const bidirectional_iterator<Iter> &rhs)
-	{return (lhs.getCurrent() == rhs.getCurrent());}
+	//++a; a++; *a++;
+	iterator& operator++ () {
+		_ptr = _ptr->sucessor();
+		return *this;
+	}
 
-	template<typename Iter>
-	bool operator!=(const bidirectional_iterator<Iter> &lhs, const bidirectional_iterator<Iter> &rhs)
-	{return (lhs.getCurrent() != rhs.getCurrent());}
+	iterator operator++ (int) {
+		iterator tmp = *this;
+		_ptr = _ptr->sucessor();
+		return tmp;
+	}
+
+	//--a; a--; *a--;
+	iterator& operator-- () {
+		_ptr = _ptr->predecessor();
+		return *this;
+	}
+
+	iterator operator-- (int) {
+		iterator tmp = *this;
+		_ptr = _ptr->predecessor();
+		return tmp;
+	}
+
+private:
+	iterator_type _ptr;
+};
 }
-
 #endif

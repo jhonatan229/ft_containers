@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <ft_iterator.hpp>
+#include <iterator.hpp>
 
 typedef ft::random_access_iterator<int *> iterator;
 int array1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
