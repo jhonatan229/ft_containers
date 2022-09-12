@@ -1,78 +1,74 @@
 #include <gtest/gtest.h>
 #include <iterator.hpp>
+#include <vector.hpp>
 
-typedef ft::random_access_iterator<int *> iterator;
-int array1[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int array2[] = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
-iterator it(array1);
+TEST(TestIterator, TestIteratorIncrementAndDecrement) {
+	int ar[] = {1, 2, 3, 4, 5};
+	ft::vector<int> vec(ar, ar + 5);
+	ft::vector<int>::iterator it = vec.begin();
 
-TEST(Test_my_iterator, first_position)
-{
+	EXPECT_EQ(*it, 1);
+	++it;
+	EXPECT_EQ(*it, 2);
+	it++;
+	EXPECT_EQ(*it, 3);
+	++it;
+	EXPECT_EQ(*it, 4);
+	it++;
+	EXPECT_EQ(*it, 5);
+
+	--it;
+	EXPECT_EQ(*it, 4);
+	it--;
+	EXPECT_EQ(*it, 3);
+	--it;
+	EXPECT_EQ(*it, 2);
+	it--;
 	EXPECT_EQ(*it, 1);
 }
 
-TEST(Test_my_iterator, testing_plus_operation)
-{
-	EXPECT_EQ(*(it + 1), 2);
+TEST(TestIterator, TestIteratorOperatorPlusAndMinus) {
+	int ar[] = {1, 2, 3, 4, 5};
+	ft::vector<int> vec(ar, ar + 5);
+	ft::vector<int>::iterator it = vec.begin();
+
+	EXPECT_EQ(*it, 1);
+	*it += 5;
+	EXPECT_EQ(*it, 6);
+	EXPECT_EQ(*it + 2, 8);
+	*it -= 5;
+	EXPECT_EQ(*it, 1);
+	EXPECT_EQ(*it - 1, 0);
+	EXPECT_EQ(it[4], 5);
 }
 
-TEST(Test_my_iterator, testing_minus_operation)
-{
-	*it = *it + 1;
-	EXPECT_EQ(*(it - 1), 0);
+TEST(TestIterator, TestIteratorRelationalOperator) {
+	int ar[] = {1, 2, 3, 4, 5};
+	ft::vector<int> vec(ar, ar + 5);
+	ft::vector<int>::iterator it = vec.begin();
+
+	ft::vector<int> const cvec(ar, ar + 5);
+	ft::vector<int>::const_iterator cit = cvec.begin();
+
+	int ar2[] = {10, 2, 3, 4, 5, 6};
+	ft::vector<int> const cvec2(ar2, ar2 + 6);
+	ft::vector<int>::const_iterator cit2 = cvec2.begin();
+
+	EXPECT_TRUE(*it == *cit);
+	EXPECT_FALSE(*it == *cit2);
+	
+	EXPECT_FALSE(*it != *cit);
+	EXPECT_TRUE(*it != *cit2);
+
+	EXPECT_FALSE(*it > *cit);
+	EXPECT_FALSE(*it > *cit2);
+	
+	EXPECT_FALSE(*it < *cit);
+	EXPECT_TRUE(*it < *cit2);
+	
+	EXPECT_TRUE(*it <= *cit);
+	EXPECT_TRUE(*it <= *cit2);
+	
+	EXPECT_TRUE(*it >= *cit);
+	EXPECT_FALSE(*it >= *cit2);
 }
-
-TEST(Test_my_iterator, testing_plusplus_operation)
-{
-	it++;
-	EXPECT_EQ(*it, 2);
-}
-
-TEST(Test_my_iterator, testing_minusminus_operation)
-{
-	it--;
-	EXPECT_EQ(*it, 2);
-}
-
-TEST(Test_my_iterator, testing_plusequal_operation)
-{
-	it+= 1;
-	EXPECT_EQ(*it, 2);
-}
-
-TEST(Test_my_iterator, testing_minusequal_operation)
-{
-	it-= 1;
-	EXPECT_EQ(*it, 2);
-}
-
-TEST(Test_my_iterator, testing_sum_operation)
-{
-	*it = *it + 2;
-	EXPECT_EQ(*it, 4);
-}
-
-TEST(Test_my_iterator, testing_if_is_equal)
-{
-	EXPECT_EQ((*it == 4), true);
-}
-
-TEST(Test_my_iterator, testing_if_is_bigger)
-{
-	EXPECT_EQ((*it > 2), true);
-}
-
-TEST(Test_my_iterator, testing_if_is_smalest)
-{
-	EXPECT_EQ((*it < 7), true);
-}
-
-TEST(Test_my_iterator, testing_if_is_different)
-{
-	EXPECT_EQ((*it != 5), true);
-}
-
-
-
-
-

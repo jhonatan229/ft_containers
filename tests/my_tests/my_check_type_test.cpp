@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../includes/check_type.hpp"
+#include <check_type.hpp>
 
 TEST(check_type, Test_all_types)
 {

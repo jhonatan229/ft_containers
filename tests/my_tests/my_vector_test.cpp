@@ -65,16 +65,20 @@ TEST(vector_tests, testing_get_positions) {
 	EXPECT_EQ(vec1.front(), "one");
 	EXPECT_EQ(vec1.back(), "five");
 }
-TEST(vector_tests, testing_push_back_pop_back) {
+TEST(vector_tests, testing_push_back) {
 	std::string array1[] = { "one", "two", "three", "four", "five"};
 
 	ft::vector<std::string> vec1(array1, array1 + 5);	
 	vec1.push_back("six");
 	EXPECT_EQ(*(vec1.end() - 1), "six");
-	EXPECT_EQ(vec1.size(), 6);
+	EXPECT_EQ(vec1.size(), 6);	
+}
+TEST(vector_tests, testing__pop_back) {
+	std::string array1[] = { "one", "two", "three", "four", "five"};
+
+	ft::vector<std::string> vec1(array1, array1 + 5);	
 	vec1.pop_back();
-	EXPECT_EQ(*(vec1.end() - 1), "five");
-	EXPECT_EQ(vec1.size(), 5);
+	EXPECT_EQ(vec1.size(), 4);
 	
 }
 TEST(vector_tests, test_assign) {

@@ -4,7 +4,9 @@ STL = stl_containers
 #_________________________/\__________________________#
 
 PATH_SRC = ./tests/my_tests
+PATH_SRC_PERFORM = ./tests/my_tests/perform
 PATH_SRC_STL = ./tests/STL
+PATH_SRC_STL_PERFORM = ./tests/STL/perform
 PATH_SRC_INTRA = ./tests/intra_test
 PATH_GTEST = ./tests
 GTEST_DIR = ./tests/googletest/googletest
@@ -12,7 +14,7 @@ GTEST_DIR = ./tests/googletest/googletest
 #_________________________/\__________________________#
 
 CPPFLAGS += -isystem $(GTEST_DIR)/include
-CXXFLAGS += -g -Wall -Wextra -Werror -pthread -fsanitize=address
+CXXFLAGS += -g -Wall -Wextra -Werror -pthread 
 CXX = c++
 RM = rm -rf
 
@@ -82,40 +84,40 @@ $(PATH_OBJ_INTRA)/%.o: $(PATH_SRC_INTRA)/%.cpp
 
 #_________________________/\__________________________#
 
-PATH_OBJ = ./obj
-SRC = $(addprefix $(PATH_SRC)/, performance_test.cpp)
-OBJ = $(patsubst $(PATH_SRC)/%.cpp, $(PATH_OBJ)/%.o, $(SRC))
+PATH_OBJ_PARFORM = ./obj_perform
+SRC_PERFORM = $(addprefix $(PATH_SRC_PERFORM)/, performance_test.cpp)
+OBJ_PERFORM = $(patsubst $(PATH_SRC_PERFORM)/%.cpp, $(PATH_OBJ_PARFORM)/%.o, $(SRC_PERFORM))
 
-perform: $(OBJ)
+perform: $(OBJ_PERFORM)
 	make -C $(PATH_GTEST)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ) -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ_PERFORM) -o $@
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
 	@echo "|           $(NAME) Created            |"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 
-$(PATH_OBJ)/%.o: $(PATH_SRC)/%.cpp
+$(PATH_OBJ)/%.o: $(PATH_SRC_PERFORM)/%.cpp
 	@mkdir -p $(PATH_OBJ)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
 
 #_________________________/\__________________________#
 
-PATH_OBJ_STL = ./obj_stl
-SRC_STL = $(addprefix $(PATH_SRC_STL)/, performance_test.cpp)
-OBJ_STL = $(patsubst $(PATH_SRC_STL)/%.cpp, $(PATH_OBJ_STL)/%.o, $(SRC_STL))
+PATH_OBJ_STL_PERFORM = ./obj_stl_perform
+SRC_STL_PERFORM = $(addprefix $(PATH_SRC_STL_PERFORM)/, performance_test.cpp)
+OBJ_STL_PERFORM = $(patsubst $(PATH_SRC_STL_PERFORM)/%.cpp, $(PATH_OBJ_STL)/%.o, $(SRC_STL_PERFORM))
 
 original_perform: $(OBJ_STL)
 	make -C $(PATH_GTEST)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ_STL) -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ_STL_PERFORM) -o $@
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
 	@echo "|           $(STL) Created            |"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 
-$(PATH_OBJ_STL)/%.o: $(PATH_SRC_STL)/%.cpp
-	@mkdir -p $(PATH_OBJ_STL)
+$(PATH_OBJ_STL_PERFORM)/%.o: $(PATH_SRC_STL_PERFORM)/%.cpp
+	@mkdir -p $(PATH_OBJ_STL_PERFORM)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
 
 #_________________________/\__________________________#

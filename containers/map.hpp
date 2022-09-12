@@ -272,10 +272,6 @@ namespace ft
 				if (iter->first <= k)
 					return (iter);
 			}
-
-			// for (iterator iter = begin(); iter != end(); iter++)
-			// {
-			// }
 			return end();
 		}
 		const_iterator lower_bound(const key_type &k) const
@@ -428,17 +424,17 @@ namespace ft
 			return height(node->left) - height(node->right);
 		}
 
-		// void ajust_height(map_node *node)
-		// {
-		// 	if (node->left && node->left != _begin)
-		// 		node->left->height = max(height(node->left->left), height(node->left->right)) + 1;
-		// 	if (node->right && node->right != _begin)
-		// 		node->right->height = max(height(node->right->left), height(node->right->right)) + 1;
-		// 	if (node != _end && node != _begin)
-		// 		node->height = max(height(node->left), height(node->right)) + 1;
-		// 	if (node->parent)
-		// 		node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
-		// }
+		void ajust_height(map_node *node)
+		{
+			if (node->left && node->left != _begin)
+				node->left->height = max(height(node->left->left), height(node->left->right)) + 1;
+			if (node->right && node->right != _end)
+				node->right->height = max(height(node->right->left), height(node->right->right)) + 1;
+			if (node != _end && node != _begin)
+				node->height = max(height(node->left), height(node->right)) + 1;
+			if (node->parent)
+				node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
+		}
 
 		map_node *right_rotate(map_node *node)
 		{
@@ -457,14 +453,8 @@ namespace ft
 				else if (tmp->parent && compare(tmp->parent->value.first, node->value.first))
 					tmp->parent->right = tmp;
 				node = tmp;
-				if (node->left && node->left != _begin)
-					node->left->height = max(height(node->left->left), height(node->left->right)) + 1;
-				if (node->right && node->right != _end)
-					node->right->height = max(height(node->right->left), height(node->right->right)) + 1;
-				if (node != _end && node != _begin)
-					node->height = max(height(node->left), height(node->right)) + 1;
-				if (node->parent)
-					node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;			}
+				ajust_height(node);
+			}
 			return node;
 		}
 		map_node *left_rotate(map_node *node)
@@ -484,14 +474,7 @@ namespace ft
 				else if (tmp->parent && compare(tmp->parent->value.first, node->value.first))
 					tmp->parent->right = tmp;
 				node = tmp;
-				if (node->left && node->left != _begin)
-					node->left->height = max(height(node->left->left), height(node->left->right)) + 1;
-				if (node->right && node->right != _end)
-					node->right->height = max(height(node->right->left), height(node->right->right)) + 1;
-				if (node != _end && node != _begin)
-					node->height = max(height(node->left), height(node->right)) + 1;
-				if (node->parent)
-					node->parent->height = max(height(node->parent->left), height(node->parent->right)) + 1;
+				ajust_height(node);
 			}
 			return node;
 		}

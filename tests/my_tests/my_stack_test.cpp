@@ -12,6 +12,6 @@ TEST(stack_tests, testing_constructor_with_param) {
 	ft::stack<int, ft::vector<int>>my_stack(vec);
 
 	EXPECT_EQ(my_stack.size(), 5);
-	EXPECT_TRUE(my_stack.empty());
+	EXPECT_FALSE(my_stack.empty());
 
 }
