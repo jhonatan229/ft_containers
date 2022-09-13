@@ -14,7 +14,7 @@ GTEST_DIR = ./tests/googletest/googletest
 #_________________________/\__________________________#
 
 CPPFLAGS += -isystem $(GTEST_DIR)/include
-CXXFLAGS += -g -Wall -Wextra -Werror -pthread 
+CXXFLAGS += -g -Wall -Wextra -Werror -std=c++98 -pthread 
 CXX = c++
 RM = rm -rf
 
