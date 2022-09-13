@@ -97,17 +97,17 @@ perform: $(OBJ_PERFORM)
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 
-$(PATH_OBJ)/%.o: $(PATH_SRC_PERFORM)/%.cpp
-	@mkdir -p $(PATH_OBJ)
+$(PATH_OBJ_PARFORM)/%.o: $(PATH_SRC_PERFORM)/%.cpp
+	@mkdir -p $(PATH_OBJ_PARFORM)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
 
 #_________________________/\__________________________#
 
 PATH_OBJ_STL_PERFORM = ./obj_stl_perform
 SRC_STL_PERFORM = $(addprefix $(PATH_SRC_STL_PERFORM)/, performance_test.cpp)
-OBJ_STL_PERFORM = $(patsubst $(PATH_SRC_STL_PERFORM)/%.cpp, $(PATH_OBJ_STL)/%.o, $(SRC_STL_PERFORM))
+OBJ_STL_PERFORM = $(patsubst $(PATH_SRC_STL_PERFORM)/%.cpp, $(PATH_OBJ_STL_PERFORM)/%.o, $(SRC_STL_PERFORM))
 
-original_perform: $(OBJ_STL)
+original_perform: $(OBJ_STL_PERFORM)
 	make -C $(PATH_GTEST)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(IFLAGS) $(LFLAGS) $(OBJ_STL_PERFORM) -o $@
 	@echo "\033[1;32m"
