@@ -1,6 +1,7 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 #include <memory>
+#include <stdlib.h>
 #include "../includes/BSTNode.hpp"
 #include "../iterators/bidirectional_iterator.hpp"
 #include "../iterators/reverse_iterator.hpp"
@@ -14,7 +15,7 @@ namespace ft
 	template <class Key,
 			  class T,
 			  class Compare = std::less<Key>,
-			  class Alloc = std::allocator<ft::pair<const Key, T>>>
+			  class Alloc = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
 

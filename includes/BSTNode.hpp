@@ -19,13 +19,19 @@ namespace ft
 		// height: The maximum number of nodes that can be visited starting at the tree's root and moving only downward. An an empty tree has height 0.
 		int height;
 
-		explicit BSTNode() : parent(NULL), left(NULL), right(NULL), value(), height(0){};
+		BSTNode() : parent(NULL), left(NULL), right(NULL), value(), height(0){};
 
-		explicit BSTNode(const Pair &data) : parent(NULL), left(NULL), right(NULL), value(data), height(0){};
+		BSTNode(const Pair &data) : parent(NULL), left(NULL), right(NULL), value(data), height(0){};
 
 		~BSTNode(){};
 
-		BSTNode(const BSTNode &x) { *this = x; }
+		BSTNode(const BSTNode &x) : value(x.value)
+		{
+			parent = x.parent;
+			left = x.left;
+			right = x.right;
+			height = x.height;
+		}
 
 		BSTNode &operator=(const BSTNode &x)
 		{
@@ -40,7 +46,7 @@ namespace ft
 			return *this;
 		}
 
-		//acha o menor item da lista
+		// acha o menor item da lista
 		BSTNode *findMin(BSTNode *node)
 		{
 			if (!node)
@@ -50,7 +56,7 @@ namespace ft
 			return node;
 		}
 
-		//acha o maior item da lista
+		// acha o maior item da lista
 		BSTNode *findMax(BSTNode *node)
 		{
 			if (!node)
@@ -82,13 +88,13 @@ namespace ft
 			return tmp_parent;
 		}
 
-		// retorna o node antecessor 
+		// retorna o node antecessor
 		BSTNode *predecessor()
 		{
 			BSTNode *tmp = this;
 
 			// case 1: existir um node na esquerda
-			//rodar o findmax até achar o numero antecessor
+			// rodar o findmax até achar o numero antecessor
 			if (tmp->left)
 				return findMax(tmp->left);
 
