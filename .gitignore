@@ -1,12 +1,8 @@
-tests/*.o
-tests/*.a
 obj
 ft_containers
-stl
-obj_stl
 obj_intra
 intra
-original_perform
-obj_perform
-obj_stl_perform
+obj_my_testes
+obj_stl_testes
 ./perform
+.vscode
