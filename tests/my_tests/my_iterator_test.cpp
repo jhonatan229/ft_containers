@@ -1,74 +1,79 @@
-#include <gtest/gtest.h>
-#include <iterator.hpp>
-#include <vector.hpp>
+#include <tests.hpp>
 
-TEST(TestIterator, TestIteratorIncrementAndDecrement) {
-	int ar[] = {1, 2, 3, 4, 5};
-	ft::vector<int> vec(ar, ar + 5);
-	ft::vector<int>::iterator it = vec.begin();
+void make_my_iterator_test()
+{
+	std::cout << "TEST MY ITERATOR" << std::endl;
+	{
 
-	EXPECT_EQ(*it, 1);
-	++it;
-	EXPECT_EQ(*it, 2);
-	it++;
-	EXPECT_EQ(*it, 3);
-	++it;
-	EXPECT_EQ(*it, 4);
-	it++;
-	EXPECT_EQ(*it, 5);
+		std::cout << "ITERATOR INCREMENT" << std::endl;
+		int ar[] = {1, 2, 3, 4, 5};
+		ft::vector<int> vec(ar, ar + 5);
+		ft::vector<int>::iterator it = vec.begin();
 
-	--it;
-	EXPECT_EQ(*it, 4);
-	it--;
-	EXPECT_EQ(*it, 3);
-	--it;
-	EXPECT_EQ(*it, 2);
-	it--;
-	EXPECT_EQ(*it, 1);
-}
+		std::cout << "TEST #1 - " << ((*it == 1) ? "✅" : "❌") << std::endl;
+		++it;
+		std::cout << "TEST #2 - " << ((*it == 2) ? "✅" : "❌") << std::endl;
+		it++;
+		std::cout << "TEST #3 - " << ((*it == 3) ? "✅" : "❌") << std::endl;
+		++it;
+		std::cout << "TEST #4 - " << ((*it == 4) ? "✅" : "❌") << std::endl;
+		it++;
+		std::cout << "TEST #5 - " << ((*it == 5) ? "✅" : "❌") << std::endl;
 
-TEST(TestIterator, TestIteratorOperatorPlusAndMinus) {
-	int ar[] = {1, 2, 3, 4, 5};
-	ft::vector<int> vec(ar, ar + 5);
-	ft::vector<int>::iterator it = vec.begin();
+		std::cout << "ITERATOR DECREMENT" << std::endl;
+		--it;
+		std::cout << "TEST #1 - " << ((*it == 4) ? "✅" : "❌") << std::endl;
+		it--;
+		std::cout << "TEST #2 - " << ((*it == 3) ? "✅" : "❌") << std::endl;
+		--it;
+		std::cout << "TEST #3 - " << ((*it == 2) ? "✅" : "❌") << std::endl;
+		it--;
+		std::cout << "TEST #4 - " << ((*it == 1) ? "✅" : "❌") << std::endl;
+	}
 
-	EXPECT_EQ(*it, 1);
-	*it += 5;
-	EXPECT_EQ(*it, 6);
-	EXPECT_EQ(*it + 2, 8);
-	*it -= 5;
-	EXPECT_EQ(*it, 1);
-	EXPECT_EQ(*it - 1, 0);
-	EXPECT_EQ(it[4], 5);
-}
+	{
+		int ar[] = {1, 2, 3, 4, 5};
+		ft::vector<int> vec(ar, ar + 5);
+		ft::vector<int>::iterator it = vec.begin();
+		std::cout << "ITERATOR OPERATOR PLUS AND MINUS" << std::endl;
 
-TEST(TestIterator, TestIteratorRelationalOperator) {
-	int ar[] = {1, 2, 3, 4, 5};
-	ft::vector<int> vec(ar, ar + 5);
-	ft::vector<int>::iterator it = vec.begin();
+		std::cout << "TEST #1 - " << ((*it == 1) ? "✅" : "❌") << std::endl;
+		*it += 5;
+		std::cout << "TEST #2 - " << ((*it == 6) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #3 - " << (((*it + 2) == 8) ? "✅" : "❌") << std::endl;
+		*it -= 5;
+		std::cout << "TEST #4 - " << ((*it == 1) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #5 - " << (((*it - 1) == 0) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #6 - " << ((it[4] == 5) ? "✅" : "❌") << std::endl;
+	}
+		{
+		int ar[] = {1, 2, 3, 4, 5};
+		ft::vector<int> vec(ar, ar + 5);
+		ft::vector<int>::iterator it = vec.begin();
 
-	ft::vector<int> const cvec(ar, ar + 5);
-	ft::vector<int>::const_iterator cit = cvec.begin();
+		ft::vector<int> const cvec(ar, ar + 5);
+		ft::vector<int>::const_iterator cit = cvec.begin();
 
-	int ar2[] = {10, 2, 3, 4, 5, 6};
-	ft::vector<int> const cvec2(ar2, ar2 + 6);
-	ft::vector<int>::const_iterator cit2 = cvec2.begin();
+		int ar2[] = {10, 2, 3, 4, 5, 6};
+		ft::vector<int> const cvec2(ar2, ar2 + 6);
+		ft::vector<int>::const_iterator cit2 = cvec2.begin();
+		std::cout << "ITERATOR RELATIONAL OPERATORS" << std::endl;
 
-	EXPECT_TRUE(*it == *cit);
-	EXPECT_FALSE(*it == *cit2);
-	
-	EXPECT_FALSE(*it != *cit);
-	EXPECT_TRUE(*it != *cit2);
+		std::cout << "TEST #1 - " << (((*it == *cit) == true) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #2 - " << (((*it == *cit2) == false) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #3 - " << (((*it != *cit) == false) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #4 - " << (((*it != *cit2) == true) ? "✅" : "❌") << std::endl;
 
-	EXPECT_FALSE(*it > *cit);
-	EXPECT_FALSE(*it > *cit2);
-	
-	EXPECT_FALSE(*it < *cit);
-	EXPECT_TRUE(*it < *cit2);
-	
-	EXPECT_TRUE(*it <= *cit);
-	EXPECT_TRUE(*it <= *cit2);
-	
-	EXPECT_TRUE(*it >= *cit);
-	EXPECT_FALSE(*it >= *cit2);
+		std::cout << "TEST #5 - " << (((*it > *cit) == false) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #6 - " << (((*it > *cit2) == false) ? "✅" : "❌") << std::endl;
+
+		std::cout << "TEST #7 - " << (((*it < *cit) == false) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #8 - " << (((*it < *cit2) == true) ? "✅" : "❌") << std::endl;
+
+		std::cout << "TEST #8 - " << (((*it <= *cit) == true) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #9 - " << (((*it <= *cit2) == true) ? "✅" : "❌") << std::endl;
+
+		std::cout << "TEST #10 - " << (((*it >= *cit) == true) ? "✅" : "❌") << std::endl;
+		std::cout << "TEST #11 - " << (((*it >= *cit2) == false) ? "✅" : "❌") << std::endl;
+	}
 }

@@ -27,7 +27,7 @@ PATH_OBJ_STL_TESTES = ./obj_stl_testes
 SRC = $(addprefix $(PATH_SRC)/, my_test.cpp) 
 OBJ = $(patsubst $(PATH_SRC)/%.cpp, $(PATH_OBJ)/%.o, $(SRC)) 
 
-SRC_MY_TESTES = $(addprefix $(PATH_TESTES)/, my_check_type_test.cpp) 
+SRC_MY_TESTES = $(addprefix $(PATH_TESTES)/, my_check_type_test.cpp my_iterator_test.cpp) 
 OBJ_MY_TESTS = $(patsubst $(PATH_TESTES)/%.cpp, $(PATH_OBJ_MY_TESTES)/%.o, $(SRC_MY_TESTES))
 
 
