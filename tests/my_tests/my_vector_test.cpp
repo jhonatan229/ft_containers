@@ -1,5 +1,4 @@
-#include <gtest/gtest.h>
-#include "../containers/vector.hpp"
+#include <tests.hpp>
 
 TEST(vector_tests, testing_constructor) {
 	ft::vector<int>my_vec;

@@ -7,7 +7,7 @@ int main(int argc, char **argv){
 	if(argv[1][0] == '1'){
 		make_my_check_type_test();
 		make_my_iterator_test();
-		// make_my_map_test();
+		make_my_map_test();
 		// make_my_stack_test();
 	}
 }

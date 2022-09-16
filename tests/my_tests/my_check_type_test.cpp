@@ -2,7 +2,7 @@
 
 void make_my_check_type_test()
 {
-	std::cout << "TEST MY CHECK TYPE" << std::endl;
+	std::cout << "\033[1;32m>>>>>>>>>>>>TEST MY CHECK TYPE<<<<<<<<<<<<<\033[0m" << std::endl;
 	std::cout << "TEST bool: ";
 	std::cout << ((ft::is_integral<bool>::value == true) ? "✅" : "❌");
 	std::cout << std::endl;

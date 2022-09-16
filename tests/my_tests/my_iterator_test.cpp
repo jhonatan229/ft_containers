@@ -2,10 +2,10 @@
 
 void make_my_iterator_test()
 {
-	std::cout << "TEST MY ITERATOR" << std::endl;
+	std::cout << "\033[1;32m>>>>>>>>>>>>TEST MY ITERATOR<<<<<<<<<<<<<\033[0m" << std::endl;
 	{
 
-		std::cout << "ITERATOR INCREMENT" << std::endl;
+		std::cout << " - ITERATOR INCREMENT - " << std::endl;
 		int ar[] = {1, 2, 3, 4, 5};
 		ft::vector<int> vec(ar, ar + 5);
 		ft::vector<int>::iterator it = vec.begin();
@@ -20,7 +20,7 @@ void make_my_iterator_test()
 		it++;
 		std::cout << "TEST #5 - " << ((*it == 5) ? "✅" : "❌") << std::endl;
 
-		std::cout << "ITERATOR DECREMENT" << std::endl;
+		std::cout << " - ITERATOR DECREMENT - " << std::endl;
 		--it;
 		std::cout << "TEST #1 - " << ((*it == 4) ? "✅" : "❌") << std::endl;
 		it--;
@@ -35,7 +35,7 @@ void make_my_iterator_test()
 		int ar[] = {1, 2, 3, 4, 5};
 		ft::vector<int> vec(ar, ar + 5);
 		ft::vector<int>::iterator it = vec.begin();
-		std::cout << "ITERATOR OPERATOR PLUS AND MINUS" << std::endl;
+		std::cout << " - ITERATOR OPERATOR PLUS AND MINUS - " << std::endl;
 
 		std::cout << "TEST #1 - " << ((*it == 1) ? "✅" : "❌") << std::endl;
 		*it += 5;
@@ -57,7 +57,7 @@ void make_my_iterator_test()
 		int ar2[] = {10, 2, 3, 4, 5, 6};
 		ft::vector<int> const cvec2(ar2, ar2 + 6);
 		ft::vector<int>::const_iterator cit2 = cvec2.begin();
-		std::cout << "ITERATOR RELATIONAL OPERATORS" << std::endl;
+		std::cout << " - ITERATOR RELATIONAL OPERATORS - " << std::endl;
 
 		std::cout << "TEST #1 - " << (((*it == *cit) == true) ? "✅" : "❌") << std::endl;
 		std::cout << "TEST #2 - " << (((*it == *cit2) == false) ? "✅" : "❌") << std::endl;
