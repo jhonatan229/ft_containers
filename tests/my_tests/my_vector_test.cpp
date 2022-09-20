@@ -3,7 +3,7 @@
 void make_my_vector_test()
 {
 
-	std::cout << "\033[1;32m>>>>>>>>>>>>TEST MY MAP<<<<<<<<<<<<<\033[0m" << std::endl;
+	std::cout << "\033[1;32m>>>>>>>>>>>>TEST VECTOR MAP<<<<<<<<<<<<<\033[0m" << std::endl;
 	{
 		std::cout << " - TEST VECTOR CONSTRUCTOR - " << std::endl;
 		ft::vector<int> my_vec;

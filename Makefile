@@ -27,13 +27,15 @@ PATH_OBJ_STL_TESTES = ./obj_stl_testes
 SRC = $(addprefix $(PATH_SRC)/, my_test.cpp) 
 OBJ = $(patsubst $(PATH_SRC)/%.cpp, $(PATH_OBJ)/%.o, $(SRC)) 
 
-SRC_MY_TESTES = $(addprefix $(PATH_TESTES)/, my_check_type_test.cpp my_iterator_test.cpp my_map_test.cpp my_vector_test.cpp my_stack_test.cpp) 
+SRC_MY_TESTES = $(addprefix $(PATH_TESTES)/, my_check_type_test.cpp my_iterator_test.cpp my_map_test.cpp my_vector_test.cpp my_stack_test.cpp performance_test.cpp) 
 OBJ_MY_TESTS = $(patsubst $(PATH_TESTES)/%.cpp, $(PATH_OBJ_MY_TESTES)/%.o, $(SRC_MY_TESTES))
 
+SRC_STL_TESTES = $(addprefix $(PATH_SRC_STL)/, original_map.cpp original_iterator_test.cpp original_vector_test.cpp performance_test.cpp) 
+OBJ_STL_TESTS = $(patsubst $(PATH_SRC_STL)/%.cpp, $(PATH_OBJ_STL_TESTES)/%.o, $(SRC_STL_TESTES))
 
 
-$(NAME): $(OBJ) $(OBJ_MY_TESTS)
-	$(CXX) $(CXXFLAGS) $(IFLAGS) $(OBJ) $(OBJ_MY_TESTS) -o $@
+$(NAME): $(OBJ) $(OBJ_MY_TESTS) $(OBJ_STL_TESTS)
+	$(CXX) $(CXXFLAGS) $(IFLAGS) $(OBJ) $(OBJ_MY_TESTS) $(OBJ_STL_TESTS) -o $@
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
 	@echo "|           $(NAME) Created            |"
@@ -46,6 +48,10 @@ $(PATH_OBJ)/%.o: $(PATH_SRC)/%.cpp
 
 $(PATH_OBJ_MY_TESTES)/%.o: $(PATH_TESTES)/%.cpp
 	@mkdir -p $(PATH_OBJ_MY_TESTES)
+	$(CXX) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
+
+$(PATH_OBJ_STL_TESTES)/%.o: $(PATH_SRC_STL)/%.cpp
+	@mkdir -p $(PATH_OBJ_STL_TESTES)
 	$(CXX) $(CXXFLAGS) $(IFLAGS) -c $< -o $@
 
 #_________________________/\__________________________#
