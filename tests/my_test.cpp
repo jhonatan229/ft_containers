@@ -8,6 +8,6 @@ int main(int argc, char **argv){
 		make_my_check_type_test();
 		make_my_iterator_test();
 		make_my_map_test();
-		// make_my_stack_test();
+		make_my_vector_test();
 	}
 }
