@@ -1,17 +1,24 @@
-#include <gtest/gtest.h>
-#include "../containers/stack.hpp"
-#include "../containers/vector.hpp"
+#include <tests.hpp>
 
-TEST(stack_tests, testing_constructor) {
-	ft::stack<int, ft::vector<int>>my_vec;
-	EXPECT_EQ(my_vec.size(), 0);
-}
+void make_my_stack_test()
+{
+	std::cout << "\033[1;32m>>>>>>>>>>>>TEST MY STACK<<<<<<<<<<<<<\033[0m" << std::endl;
+	{
+		std::cout << " - TEST STACK CONSTRUCTOR - " << std::endl;
 
-TEST(stack_tests, testing_constructor_with_param) {
-	ft::vector<int> vec(5);
-	ft::stack<int, ft::vector<int>>my_stack(vec);
+		ft::stack<int, ft::vector<int> > my_stack;
+		std::cout << "TEST #1 - " << ((my_stack.size() == 0) ? "✅" : "❌") << std::endl;
 
-	EXPECT_EQ(my_stack.size(), 5);
-	EXPECT_FALSE(my_stack.empty());
+	}
+	{
+		std::cout << " - TEST STACK POP AND PUSH - " << std::endl;
 
+		ft::vector<int> vec(5);
+		ft::stack<int, ft::vector<int> > my_stack(vec);
+		std::cout << "TEST #1 - " << ((my_stack.size() == 5) ? "✅" : "❌") << std::endl;
+		my_stack.push(2);
+		std::cout << "TEST #2 - " << ((my_stack.size() == 6) ? "✅" : "❌") << std::endl;
+		my_stack.pop();
+		std::cout << "TEST #3 - " << ((my_stack.size() == 5) ? "✅" : "❌") << std::endl;
+	}
 }
